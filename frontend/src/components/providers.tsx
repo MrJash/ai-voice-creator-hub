@@ -14,8 +14,11 @@ export function Providers({ children }: { children: ReactNode }) {
             authClient={authClient}
             navigate={router.push}
             replace={router.replace}
-            onSessionChange={() => {
-                // Clear router cache (protected routes)
+            onSessionChange={async () => {
+                const session = await authClient.getSession()
+                if (!session.data) {
+                    router.push("/auth/sign-in")
+                }
                 router.refresh()
             }}
             Link={Link}
