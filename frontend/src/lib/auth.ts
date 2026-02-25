@@ -18,6 +18,14 @@ export const auth = betterAuth({
   database: prismaAdapter(db, {
     provider: "postgresql",
   }),
+  user: {
+    additionalFields: {
+      polarCustomerId: {
+        type: "string",
+        required: false,
+      }
+    }
+  },
   emailAndPassword: {
     enabled: true,
   },
@@ -45,7 +53,9 @@ export const auth = betterAuth({
           successUrl: "/dashboard",
           authenticatedUsersOnly: true,
         }),
-        portal(),
+        portal({
+          returnUrl: `${env.BETTER_AUTH_URL}/dashboard`
+        }),
         webhooks({
           secret: env.POLAR_WEBHOOK_SECRET,
           onOrderPaid: async (order) => {
