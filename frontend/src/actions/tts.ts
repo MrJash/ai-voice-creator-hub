@@ -23,7 +23,7 @@ interface GenerateSpeechResult {
 }
 
 const S3_BUCKET_URL =
-  "https://ai-voice-studio-sahand.s3.ap-southeast-2.amazonaws.com";
+  "https://ai-voice-creator-hub-jash.s3.us-east-1.amazonaws.com";
 
 export async function generateSpeech(
   data: GenerateSpeechData,
