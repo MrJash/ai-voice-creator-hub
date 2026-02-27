@@ -20,7 +20,7 @@ import Upgrade from "./upgrade";
 
 export default async function AppSidebar() {
   return (
-    <Sidebar className="from-background to-muted/20 border-r-0 bg-gradient-to-b">
+    <Sidebar className="from-background to-muted/20 border-r-0 bg-linear-to-b">
       <SidebarContent className="px-3">
         <MobileSidebarClose />
         <SidebarGroup>
@@ -30,7 +30,7 @@ export default async function AppSidebar() {
               className="mb-1 flex cursor-pointer items-center gap-2"
             >
               <Sparkles className="text-primary h-6 w-6" />
-              <p className="from-primary to-primary/70 bg-gradient-to-r bg-clip-text text-2xl font-bold tracking-tight text-transparent">
+              <p className="from-primary to-primary/70 bg-linear-to-r bg-clip-text text-2xl font-bold tracking-tight text-transparent">
                 AI Voice
               </p>
             </Link>
