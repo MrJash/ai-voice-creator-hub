@@ -67,7 +67,7 @@ export async function generateSpeech(
       },
       body: JSON.stringify({
         text: data.text,
-        voice_S3_key: data.voice_S3_key,
+        voice_s3_key: data.voice_S3_key,
         language: data.language,
         exaggeration: data.exaggeration ?? 0.5,
         cfg_weight: data.cfg_weight ?? 0.5,

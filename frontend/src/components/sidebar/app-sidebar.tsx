@@ -11,8 +11,9 @@ import {
   SidebarGroupLabel,
   SidebarMenu,
 } from "../ui/sidebar";
-import { User, Sparkles, Settings } from "lucide-react";
+import { User, Settings } from "lucide-react";
 import Link from "next/link";
+import Image from "next/image";
 import SidebarMenuItems from "./sidebar-menu-items";
 import MobileSidebarClose from "./mobile-sidebar-close";
 import Credits from "./credits";
@@ -29,7 +30,7 @@ export default async function AppSidebar() {
               href="/"
               className="mb-1 flex cursor-pointer items-center gap-2"
             >
-              <Sparkles className="text-primary h-6 w-6" />
+              <Image src="/logo.png" alt="AI Voice Creator Hub" width={28} height={28} className="h-7 w-7" />
               <p className="from-primary to-primary/70 bg-linear-to-r bg-clip-text text-2xl font-bold tracking-tight text-transparent">
                 AI Voice
               </p>

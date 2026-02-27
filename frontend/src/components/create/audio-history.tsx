@@ -24,7 +24,7 @@ export default function AudioHistory({
         <div className="mb-6 text-center">
           <div className="mb-2 inline-flex items-center gap-2">
             <div className="h-6 w-0.5 rounded-full bg-gradient-to-b from-blue-500 to-purple-600"></div>
-            <h2 className="bg-gradient-to-r from-gray-900 to-gray-600 bg-clip-text text-xl font-bold text-transparent">
+            <h2 className="bg-linear-to-r from-gray-900 to-gray-600 bg-clip-text text-xl font-bold text-transparent">
               Recent Generations
             </h2>
             <div className="h-6 w-0.5 rounded-full bg-gradient-to-b from-purple-600 to-blue-500"></div>
@@ -43,7 +43,7 @@ export default function AudioHistory({
                 >
                   <div className="mb-3 flex items-start justify-between">
                     <div className="flex items-center gap-2">
-                      <div className="flex h-8 w-8 items-center justify-center rounded-full bg-gradient-to-r from-blue-500 to-purple-600">
+                      <div className="flex h-8 w-8 items-center justify-center rounded-full bg-linear-to-r from-blue-500 to-purple-600">
                         <Music className="h-4 w-4 text-white" />
                       </div>
                       <div>

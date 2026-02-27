@@ -58,7 +58,7 @@ export default function TextInput({
             )}
           </div>
           {currentAudio && (
-            <div className="rounded-lg border border-blue-200 bg-gradient-to-r from-blue-50 to-purple-50 p-3">
+            <div className="rounded-lg border border-blue-200 bg-linear-to-r from-blue-50 to-purple-50 p-3">
               <div className="mb-2 flex items-center justify-between">
                 <h4 className="text-xs font-bold text-blue-900">
                   Latest Generation

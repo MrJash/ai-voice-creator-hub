@@ -48,7 +48,9 @@ const LANGUAGES: Language[] = [
 ];
 
 const VOICE_FILES: VoiceFile[] = [
-  { name: "Michael", s3_key: "samples/voices/Michael.wav" },
+  { name: "Default", s3_key: "samples/voices/Default.wav" },
+  { name: "Indian Voice", s3_key: "samples/voices/IndianVoice.flac" },
+  { name: "Female English Voice", s3_key: "samples/voices/FemaleEnglishVoice.flac" },
 ];
 
 export default function CreatePage() {
@@ -59,7 +61,7 @@ export default function CreatePage() {
   const [text, setText] = useState("");
   const [selectedLanguage, setSelectedLanguage] = useState("en");
   const [selectedVoice, setSelectedVoice] = useState(
-    VOICE_FILES[0]?.s3_key ?? "samples/voices/Michael.wav",
+    VOICE_FILES[0]?.s3_key ?? "samples/voices/Default.wav",
   );
 
   const [exaggeration, setExaggeration] = useState(0.5);
@@ -235,7 +237,7 @@ export default function CreatePage() {
       <SignedIn>
         <div className="border-b border-gray-200 bg-white py-2">
           <div className="mx-auto max-w-7xl text-center">
-            <h1 className="from-primary to-primary/70 mb-1 bg-gradient-to-r bg-clip-text text-lg font-bold text-transparent">
+            <h1 className="from-primary to-primary/70 mb-1 bg-linear-to-r bg-clip-text text-lg font-bold text-transparent">
               Text-to-Speech Generator
             </h1>
             <p className="text-muted-foreground mx-auto max-w-xl text-xs">
@@ -259,7 +261,9 @@ export default function CreatePage() {
                 setExaggeration={setExaggeration}
                 cfgWeight={cfgWeight}
                 setCfgWeight={setCfgWeight}
-    
+                userUploadedVoices={userUploadedVoices}
+                isUploadingVoice={isUploadingVoice}
+                handleVoiceUpload={handleVoiceUpload}
                 text={text}
                 isGenerating={isGenerating}
                 onGenerate={generateSpeech}
@@ -275,6 +279,7 @@ export default function CreatePage() {
               />
             </div>
           </div>
+          <br></br>
           <AudioHistory
             generatedAudios={generatedAudios}
             languages={LANGUAGES}

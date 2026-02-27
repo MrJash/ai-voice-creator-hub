@@ -1,24 +1,23 @@
 import type { ReactNode } from "react";
 import { Providers } from "~/components/providers";
-import { Sparkles, Mic, Zap, Target } from "lucide-react";
+import { Mic, Zap, Target } from "lucide-react";
 import Link from "next/link";
+import Image from "next/image";
 
 export default function AuthLayout({ children }: { children: ReactNode }) {
   return (
     <Providers>
       <div className="auth-page flex min-h-screen">
         {/* Left Side - Branding */}
-        <div className="relative hidden overflow-hidden bg-gradient-to-br from-purple-900 via-violet-900 to-indigo-900 lg:flex lg:w-1/2">
-          <div className="bg-grid-white/[0.1] absolute inset-0 bg-[size:30px_30px]" />
+        <div className="relative hidden overflow-hidden bg-linear-to-br from-purple-900 via-violet-900 to-indigo-900 lg:flex lg:w-1/2">
+          <div className="bg-grid-white/[0.1] absolute inset-0 bg-size-[30px_30px]" />
           <div className="relative z-10 flex flex-col justify-center px-12 xl:px-16">
             {/* Logo */}
             <Link
               href="/"
               className="mb-12 flex cursor-pointer items-center gap-3"
             >
-              <div className="flex h-12 w-12 items-center justify-center rounded-xl border border-violet-400/30 bg-violet-500/20 backdrop-blur-sm">
-                <Sparkles className="h-7 w-7 text-violet-300" />
-              </div>
+              <Image src="/logo.png" alt="AI Voice Creator Hub" width={48} height={48} className="h-12 w-12" />
               <span className="text-2xl font-bold text-violet-50">
                 AI Voice Creator Hub
               </span>
@@ -77,7 +76,7 @@ export default function AuthLayout({ children }: { children: ReactNode }) {
         </div>
 
         {/* Right Side - Auth Form */}
-        <div className="flex flex-1 flex-col justify-center bg-gradient-to-br from-slate-50 to-violet-50/30 px-6 py-12 lg:px-8">
+        <div className="flex flex-1 flex-col justify-center bg-linear-to-br from-slate-50 to-violet-50/30 px-6 py-12 lg:px-8">
           <div className="sm:mx-auto sm:w-full sm:max-w-md">
             {/* Mobile Logo */}
             <div className="mb-8 text-center lg:hidden">
@@ -85,11 +84,9 @@ export default function AuthLayout({ children }: { children: ReactNode }) {
                 href="/"
                 className="inline-flex cursor-pointer items-center gap-2"
               >
-                <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-gradient-to-r from-violet-500 to-purple-600 shadow-lg">
-                  <Sparkles className="h-6 w-6 text-white" />
-                </div>
-                <span className="bg-gradient-to-r from-violet-600 to-purple-600 bg-clip-text text-xl font-bold text-transparent">
-                  AI Voice Studio
+                <Image src="/logo.png" alt="AI Voice Creator Hub" width={40} height={40} className="h-10 w-10" />
+                <span className="bg-linear-to-r from-violet-600 to-purple-600 bg-clip-text text-xl font-bold text-transparent">
+                  AI Voice Creator Hub
                 </span>
               </Link>
             </div>
