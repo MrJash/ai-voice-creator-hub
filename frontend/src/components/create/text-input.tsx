@@ -3,9 +3,7 @@
 import { X, Download } from "lucide-react";
 
 import { Card, CardContent } from "~/components/ui/card";
-
 import { Button } from "~/components/ui/button";
-
 import type { GeneratedAudio } from "~/types/tts";
 
 interface TextInputProps {
@@ -23,16 +21,15 @@ export default function TextInput({
   audioRef,
   onDownload,
 }: TextInputProps) {
+
   return (
     <Card className="shadow-lg">
       <CardContent className="p-2 sm:p-3">
-        <div className="mb-2 flex items-start justify-between">
-          <div>
-            <h3 className="mb-0.5 text-sm font-bold">Your Text</h3>
-            <p className="text-muted-foreground text-xs">
-              Enter the text you want to convert to speech
-            </p>
-          </div>
+        <div className="mb-2">
+          <h3 className="mb-0.5 text-sm font-bold">Your Text</h3>
+          <p className="text-muted-foreground text-xs">
+            Enter the text you want to convert to speech
+          </p>
         </div>
         <div className="space-y-3">
           <textarea

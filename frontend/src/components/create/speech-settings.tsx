@@ -10,6 +10,8 @@ import {
   Check,
   Upload,
   Mic,
+  Play,
+  Square,
 } from "lucide-react";
 import { Card, CardContent } from "~/components/ui/card";
 import { Button } from "~/components/ui/button";
@@ -22,7 +24,9 @@ import {
   DropdownMenuLabel,
 } from "~/components/ui/dropdown-menu";
 import type { Language, VoiceFile, UploadedVoice } from "~/types/tts";
-import { useRef } from "react";
+import { useRef, useState } from "react";
+
+const S3_BUCKET_URL = "https://ai-voice-creator-hub-jash.s3.us-east-1.amazonaws.com";
 
 interface SpeechSettingsProps {
   languages: Language[];
@@ -66,6 +70,26 @@ export default function SpeechSettings({
   const selectedVoiceFile = voiceFiles.find((v) => v.s3_key === selectedVoice);
   const selectedUploadedVoice = userUploadedVoices.find((v) => v.s3Key === selectedVoice);
   const fileInputRef = useRef<HTMLInputElement>(null);
+  const [playingVoice, setPlayingVoice] = useState<string | null>(null);
+  const previewAudioRef = useRef<HTMLAudioElement | null>(null);
+
+  const playPreview = (e: React.MouseEvent, s3Key: string) => {
+    e.stopPropagation();
+    e.preventDefault();
+    if (playingVoice === s3Key) {
+      previewAudioRef.current?.pause();
+      setPlayingVoice(null);
+      return;
+    }
+    if (previewAudioRef.current) {
+      previewAudioRef.current.pause();
+    }
+    const audio = new Audio(`${S3_BUCKET_URL}/${s3Key}`);
+    previewAudioRef.current = audio;
+    setPlayingVoice(s3Key);
+    audio.play().catch(() => setPlayingVoice(null));
+    audio.onended = () => setPlayingVoice(null);
+  };
 
   return (
     <Card className="border-border/60 shadow-sm">
@@ -150,11 +174,26 @@ export default function SpeechSettings({
                   <DropdownMenuItem
                     key={voice.s3_key}
                     onClick={() => setSelectedVoice(voice.s3_key)}
-                    className="flex items-center justify-between text-xs"
+                    className="flex items-center gap-2 text-xs"
                   >
-                    <span>{voice.name}</span>
-                    {voice.s3_key === selectedVoice && (
-                      <Check className="h-3.5 w-3.5" />
+                    <div className="flex h-4 w-4 shrink-0 items-center justify-center">
+                      {voice.s3_key === selectedVoice && (
+                        <Check className="h-3.5 w-3.5 text-primary" />
+                      )}
+                    </div>
+                    <span className="flex-1">{voice.name}</span>
+                    {voice.name !== "Default" && (
+                      <button
+                        onClick={(e) => playPreview(e, voice.s3_key)}
+                        className="rounded-full p-1 text-muted-foreground transition-colors hover:bg-muted hover:text-foreground"
+                        title={playingVoice === voice.s3_key ? "Stop preview" : "Preview voice"}
+                      >
+                        {playingVoice === voice.s3_key ? (
+                          <Square className="h-3 w-3 fill-current" />
+                        ) : (
+                          <Play className="h-3 w-3 fill-current" />
+                        )}
+                      </button>
                     )}
                   </DropdownMenuItem>
                 ))}
@@ -166,15 +205,28 @@ export default function SpeechSettings({
                       <DropdownMenuItem
                         key={voice.id}
                         onClick={() => setSelectedVoice(voice.s3Key)}
-                        className="flex items-center justify-between text-xs"
+                        className="flex items-center gap-2 text-xs"
                       >
-                        <span className="flex items-center gap-1.5">
+                        <div className="flex h-4 w-4 shrink-0 items-center justify-center">
+                          {voice.s3Key === selectedVoice && (
+                            <Check className="h-3.5 w-3.5 text-primary" />
+                          )}
+                        </div>
+                        <span className="flex flex-1 items-center gap-1.5">
                           <Mic className="h-3 w-3" />
                           {voice.name}
                         </span>
-                        {voice.s3Key === selectedVoice && (
-                          <Check className="h-3.5 w-3.5" />
-                        )}
+                        <button
+                          onClick={(e) => playPreview(e, voice.s3Key)}
+                          className="rounded-full p-1 text-muted-foreground transition-colors hover:bg-muted hover:text-foreground"
+                          title={playingVoice === voice.s3Key ? "Stop preview" : "Preview voice"}
+                        >
+                          {playingVoice === voice.s3Key ? (
+                            <Square className="h-3 w-3 fill-current" />
+                          ) : (
+                            <Play className="h-3 w-3 fill-current" />
+                          )}
+                        </button>
                       </DropdownMenuItem>
                     ))}
                   </>

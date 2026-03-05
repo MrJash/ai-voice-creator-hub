@@ -56,8 +56,10 @@ export default function SidebarMenuItems() {
             asChild
             isActive={item.active}
             className={cn(
-              "group hover:bg-primary/10 hover:text-primary relative h-10 w-full justify-start rounded-lg px-3 py-2 text-sm font-medium transition-all duration-200",
-              item.active && "bg-primary/15 text-primary shadow-sm",
+              "group relative h-10 w-full justify-start rounded-xl px-3 py-2 text-sm font-medium transition-all duration-200",
+              item.active
+                ? "bg-white text-foreground shadow-md shadow-black/10 dark:bg-white/10 dark:shadow-white/5"
+                : "text-muted-foreground hover:bg-muted hover:text-foreground",
             )}
           >
             <Link
@@ -67,16 +69,13 @@ export default function SidebarMenuItems() {
             >
               <item.icon
                 className={cn(
-                  "h-5 w-5 transition-colors duration-200",
+                  "h-[18px] w-[18px] shrink-0 transition-all duration-200",
                   item.active
                     ? "text-primary"
-                    : "text-muted-foreground group-hover:text-primary",
+                    : "text-muted-foreground/70 group-hover:text-foreground",
                 )}
               />
               <span className="truncate">{item.title}</span>
-              {item.active && (
-                <div className="bg-primary absolute top-1/2 left-0 h-6 w-1 -translate-y-1/2 rounded-r-full" />
-              )}
             </Link>
           </SidebarMenuButton>
         </SidebarMenuItem>

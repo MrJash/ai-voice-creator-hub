@@ -8,7 +8,6 @@ import {
   SidebarFooter,
   SidebarGroup,
   SidebarGroupContent,
-  SidebarGroupLabel,
   SidebarMenu,
 } from "../ui/sidebar";
 import { User, Settings } from "lucide-react";
@@ -21,40 +20,71 @@ import Upgrade from "./upgrade";
 
 export default async function AppSidebar() {
   return (
-    <Sidebar className="from-background to-muted/20 border-r-0 bg-linear-to-b">
-      <SidebarContent className="px-3">
+    <Sidebar className="border-r border-border/40">
+      <SidebarContent className="px-4">
         <MobileSidebarClose />
-        <SidebarGroup>
-          <SidebarGroupLabel className="text-primary mt-6 mb-8 flex flex-col items-start justify-start px-2">
-            <Link
-              href="/"
-              className="mb-1 flex cursor-pointer items-center gap-2"
-            >
-              <Image src="/logo.png" alt="AI Voice Creator Hub" width={28} height={28} className="h-7 w-7" />
-              <p className="from-primary to-primary/70 bg-linear-to-r bg-clip-text text-2xl font-bold tracking-tight text-transparent">
+
+        {/* Brand */}
+        <div className="mt-6 mb-1 px-2">
+          <Link href="/" className="group flex items-center gap-3">
+            <div className="relative">
+              <div className="absolute -inset-1 rounded-xl bg-primary/15 blur-md transition-all duration-500 group-hover:bg-primary/25 group-hover:blur-lg" />
+              <Image
+                src="/logo.png"
+                alt="AI Voice Creator Hub"
+                width={36}
+                height={36}
+                className="relative h-9 w-9 drop-shadow-sm transition-transform duration-300 group-hover:scale-105"
+              />
+            </div>
+            <div className="flex flex-col">
+              <span className="text-[15px] font-bold leading-tight tracking-tight text-foreground">
                 AI Voice
-              </p>
-            </Link>
-            <p className="text-muted-foreground ml-8 text-sm font-medium tracking-wide">
-              Creator Hub 
-            </p>
-          </SidebarGroupLabel>
+              </span>
+              <span className="text-[10px] font-semibold uppercase leading-tight tracking-[0.2em] text-muted-foreground/60">
+                Creator Hub
+              </span>
+            </div>
+          </Link>
+
+          {/* Audio-wave separator */}
+          <div className="mt-5 flex items-center gap-3">
+            <div className="h-px flex-1 bg-gradient-to-r from-border/80 to-transparent" />
+            <div className="flex items-end gap-[3px]">
+              <div className="h-1.5 w-[3px] rounded-full bg-primary/30" />
+              <div className="h-2.5 w-[3px] rounded-full bg-primary/50" />
+              <div className="h-3.5 w-[3px] rounded-full bg-primary/70" />
+              <div className="h-2.5 w-[3px] rounded-full bg-primary/50" />
+              <div className="h-1.5 w-[3px] rounded-full bg-primary/30" />
+            </div>
+            <div className="h-px flex-1 bg-gradient-to-l from-border/80 to-transparent" />
+          </div>
+        </div>
+
+        {/* Navigation */}
+        <SidebarGroup className="mt-3">
+          <p className="mb-2 px-3 text-[10px] font-semibold uppercase tracking-[0.15em] text-muted-foreground/50">
+            Menu
+          </p>
           <SidebarGroupContent>
-            <SidebarMenu className="space-y-1">
+            <SidebarMenu className="space-y-0.5">
               <SidebarMenuItems />
             </SidebarMenu>
           </SidebarGroupContent>
         </SidebarGroup>
       </SidebarContent>
-      <SidebarFooter className="bg-muted/30 border-t p-3">
-        <div className="mb-3 flex w-full items-center justify-center gap-2 text-xs">
-           <Credits />
-           <Upgrade />
 
+      <SidebarFooter className="border-t border-border/40 p-4">
+        {/* Credits & Upgrade card */}
+        <div className="mb-3 rounded-xl border border-border/50 bg-muted/20 px-3 py-2.5 backdrop-blur-sm">
+          <div className="flex items-center justify-between">
+            <Credits />
+            <Upgrade />
+          </div>
         </div>
         <UserButton
           variant="outline"
-          className="border-muted-foreground/20 hover:border-primary/50 w-full transition-colors"
+          className="border-border/50 hover:border-primary/30 hover:bg-muted/50 w-full transition-all duration-200"
           disableDefaultLinks={true}
           additionalLinks={[
             {

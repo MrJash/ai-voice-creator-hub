@@ -2,7 +2,7 @@
 
 import { authClient } from "~/lib/auth-client";
 import { Button } from "../ui/button";
-import { Crown, Sparkles } from "lucide-react";
+import { Zap } from "lucide-react";
 
 export default function Upgrade() {
   const upgrade = async () => {
@@ -16,19 +16,13 @@ export default function Upgrade() {
   };
   return (
     <Button
-      variant="outline"
+      variant="ghost"
       size="sm"
-      className="group relative ml-2 overflow-hidden border-orange-400/50 bg-linear-to-r from-orange-400/10 to-pink-500/10 text-orange-400 transition-all duration-300 hover:border-orange-500/70 hover:bg-linear-to-r hover:from-orange-500 hover:to-pink-600 hover:text-white hover:shadow-lg hover:shadow-orange-500/25"
+      className="group h-7 gap-1 rounded-lg bg-gradient-to-r from-amber-500/10 to-orange-500/10 px-2.5 text-xs font-semibold text-amber-600 transition-all duration-200 hover:from-amber-500/20 hover:to-orange-500/20 hover:text-amber-500 dark:text-amber-400 dark:hover:text-amber-300"
       onClick={upgrade}
     >
-      <div className="flex items-center gap-2">
-        <Crown className="h-4 w-4 transition-transform duration-300 group-hover:rotate-12" />
-        <span className="font-medium">Upgrade</span>
-        <Sparkles className="h-3 w-3 opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
-      </div>
-
-      {/* Subtle glow effect */}
-      <div className="absolute inset-0 rounded-md bg-linear-to-r from-orange-400/20 to-pink-500/20 opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
+      <Zap className="h-3 w-3 transition-transform duration-200 group-hover:scale-110" />
+      Upgrade
     </Button>
   );
 }
