@@ -36,7 +36,7 @@ export default function AudioHistory({
         {generatedAudios.length > 0 ? (
           <>
             <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-              {generatedAudios.map((audio, index) => (
+              {generatedAudios.slice(0, 4).map((audio, index) => (
                 <div
                   key={index}
                   className="group relative overflow-hidden rounded-xl border-2 border-gray-200 bg-white p-4 shadow-lg transition-all duration-300 hover:-translate-y-1 hover:border-blue-300 hover:shadow-xl"
