@@ -12,6 +12,7 @@ interface GenerateSpeechData {
   language: string;
   exaggeration: number;
   cfg_weight: number;
+  seed: number;
 }
 
 interface GenerateSpeechResult {
@@ -71,6 +72,7 @@ export async function generateSpeech(
         language: data.language,
         exaggeration: data.exaggeration ?? 0.5,
         cfg_weight: data.cfg_weight ?? 0.5,
+        seed: data.seed ?? 0,
       }),
     });
 

@@ -48,7 +48,7 @@ const LANGUAGES: Language[] = [
 ];
 
 const VOICE_FILES: VoiceFile[] = [
-  { name: "Default", s3_key: "samples/voices/Default.wav" },
+  { name: "Default", s3_key: "samples/voices/DefaultVoice.mp3" },
   { name: "Indian Voice", s3_key: "samples/voices/IndianVoice.flac" },
   { name: "Female English Voice", s3_key: "samples/voices/FemaleEnglishVoice.flac" },
 ];
@@ -61,11 +61,12 @@ export default function CreatePage() {
   const [text, setText] = useState("");
   const [selectedLanguage, setSelectedLanguage] = useState("en");
   const [selectedVoice, setSelectedVoice] = useState(
-    VOICE_FILES[0]?.s3_key ?? "samples/voices/Default.wav",
+    VOICE_FILES[0]?.s3_key ?? "samples/voices/DefaultVoice.mp3",
   );
 
   const [exaggeration, setExaggeration] = useState(0.5);
   const [cfgWeight, setCfgWeight] = useState(0.5);
+  const [seed, setSeed] = useState(0);
   const [generatedAudios, setGeneratedAudios] = useState<GeneratedAudio[]>([]);
   const [currentAudio, setCurrentAudio] = useState<GeneratedAudio | null>(null);
   const [userUploadedVoices, setUserUploadedVoices] = useState<UploadedVoice[]>(
@@ -128,6 +129,7 @@ export default function CreatePage() {
         language: selectedLanguage,
         exaggeration: exaggeration,
         cfg_weight: cfgWeight,
+        seed: seed,
       });
 
       if (!result.success || !result.audioUrl || !result.s3_key) {
@@ -261,6 +263,8 @@ export default function CreatePage() {
                 setExaggeration={setExaggeration}
                 cfgWeight={cfgWeight}
                 setCfgWeight={setCfgWeight}
+                seed={seed}
+                setSeed={setSeed}
                 userUploadedVoices={userUploadedVoices}
                 isUploadingVoice={isUploadingVoice}
                 handleVoiceUpload={handleVoiceUpload}

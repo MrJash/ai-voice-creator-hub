@@ -39,6 +39,8 @@ interface SpeechSettingsProps {
   setExaggeration: (value: number) => void;
   cfgWeight: number;
   setCfgWeight: (value: number) => void;
+  seed: number;
+  setSeed: (value: number) => void;
   userUploadedVoices: UploadedVoice[];
   isUploadingVoice: boolean;
   handleVoiceUpload: (event: React.ChangeEvent<HTMLInputElement>) => void;
@@ -58,6 +60,8 @@ export default function SpeechSettings({
   setExaggeration,
   cfgWeight,
   setCfgWeight,
+  seed,
+  setSeed,
   userUploadedVoices,
   isUploadingVoice,
   handleVoiceUpload,
@@ -323,6 +327,31 @@ export default function SpeechSettings({
                 <span>Fast</span>
                 <span>Accurate</span>
               </div>
+            </div>
+
+            {/* Seed Input */}
+            <div className="space-y-1.5">
+              <div className="flex items-center justify-between">
+                <label className="text-muted-foreground flex items-center gap-1.5 text-xs font-medium">
+                  <Settings className="h-3.5 w-3.5" />
+                  Random Seed
+                </label>
+                <span className="text-muted-foreground/60 text-[10px]">
+                  {seed === 0 ? "random" : "fixed"}
+                </span>
+              </div>
+              <input
+                type="number"
+                min="0"
+                step="1"
+                value={seed}
+                onChange={(e) => setSeed(Math.max(0, Math.floor(Number(e.target.value))))}
+                placeholder="0 = random"
+                className="border-input bg-background text-foreground placeholder:text-muted-foreground/50 w-full rounded-md border px-2.5 py-1.5 text-xs font-mono focus:outline-none focus:ring-1 focus:ring-gray-400"
+              />
+              <p className="text-muted-foreground/60 text-[10px]">
+                0 = random each time · set a number to reproduce output
+              </p>
             </div>
           </div>
 

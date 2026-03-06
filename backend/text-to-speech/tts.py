@@ -30,6 +30,7 @@ class TextToSpeechRequest(BaseModel):
     language: str = "en"
     exaggeration: float = 0.5
     cfg_weight: float = 0.5
+    seed: int = 0
 
 
 class TextToSpeechResponse(BaseModel):
@@ -54,6 +55,8 @@ class TextToSpeachServer:
 
     @modal.fastapi_endpoint(method="POST", requires_proxy_auth=True)
     def generate_speech(self, request: TextToSpeechRequest) -> TextToSpeechResponse:
+        seed = request.seed if request.seed > 0 else torch.randint(0, 2**31, (1,)).item()
+        torch.manual_seed(seed)
         with torch.no_grad():
             if request.voice_s3_key:
                 audio_prompt_path = f"/s3-mount/{request.voice_s3_key}"
