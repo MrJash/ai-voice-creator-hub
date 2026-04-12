@@ -239,8 +239,8 @@ export default function SpeechSettings({
             </DropdownMenu>
           </div>
 
-          {/* Upload Voice (Temporarily Removed) */}
-          {/* <div className="space-y-1.5">
+          {/* Upload Voice */}
+          <div className="space-y-1.5">
             <label className="text-muted-foreground flex items-center gap-1.5 text-xs font-medium">
               <Upload className="h-3.5 w-3.5" />
               Upload Your Voice
@@ -273,7 +273,7 @@ export default function SpeechSettings({
             <p className="text-muted-foreground text-[10px]">
               Upload a clear voice sample (WAV/MP3, max 10MB)
             </p>
-          </div> */}
+          </div>
 
           {/* Sliders Section */}
           <div className="bg-muted/50 space-y-3 rounded-lg p-3">
